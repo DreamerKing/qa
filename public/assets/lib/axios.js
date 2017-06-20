@@ -27,5 +27,19 @@ export const POST = (url, data) => {
               .then(res => res.data)
               .catch(err => {
                 throw(err);
-              })
+              });
+}
+
+export const PUT =(url, data) => {
+  let csrfToken = Cookie.get('csrftoken');
+  let headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-CSRFToken': csrfToken
+  };
+  return axios.put(url, qs.stringify(data), {headers})
+              .then(res => res.data)
+              .catch(err => {
+                throw(err);
+              });
 }
